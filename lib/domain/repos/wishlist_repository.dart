@@ -7,6 +7,8 @@ abstract class WishlistRepository {
 
   Future<void> deleteWishlist(int id);
 
+  Future<void> deleteAllWishlist();
+
   Future<void> updateWishlist(WishlistEntity wishlistItem);
 
   Future<double> getAvailableMoney();

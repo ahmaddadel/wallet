@@ -5,9 +5,14 @@ import 'package:wallet/data/repos/wishlist_repository_impl.dart';
 import 'package:wallet/domain/repos/wishlist_repository.dart';
 import 'package:wallet/domain/use_cases/transactions_use_cases/get_debts_sum_use_case.dart';
 import 'package:wallet/domain/use_cases/wishlist_use_cases/add_new_wishlist_use_case.dart';
+import 'package:wallet/domain/use_cases/wishlist_use_cases/get_all_wishlists_use_cases.dart';
+import 'package:wallet/domain/use_cases/wishlist_use_cases/get_available_money_use_case.dart';
+import 'package:wallet/domain/use_cases/wishlist_use_cases/get_needed_money_use_case.dart';
+import 'package:wallet/domain/use_cases/wishlist_use_cases/get_wishlist_total_use_case.dart';
 import 'package:wallet/features/add_new_wishlist_screen/cubit/add_wishlist_cubit.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/settings_cubit.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_cubit.dart';
+import 'package:wallet/features/home_screen/wishlist_page/cubit/wishlist_cubit.dart';
 
 import '../../data/models/transactions/transactions_model.dart';
 import '../../data/repos/transactions_repository_impl.dart';
@@ -71,6 +76,10 @@ Future<void> initDependencies() async {
 
   // wishlist use_cases
   sl.registerLazySingleton(() => AddNewWishlistUseCase(repo: sl()));
+  sl.registerLazySingleton(() => GetAllWishlistUseCase(repo: sl()));
+  sl.registerLazySingleton(() => GetAvailableMoneyUseCase(repo: sl()));
+  sl.registerLazySingleton(() => GetNeededMoneyUseCase(repo: sl()));
+  sl.registerLazySingleton(() => GetTotalWishlistUseCase(repo: sl()));
 
   // cubits
   sl.registerFactory(() => AddTransactionCubit(sl()));
@@ -86,4 +95,12 @@ Future<void> initDependencies() async {
     ),
   );
   sl.registerFactory(() => AddWishlistCubit(addNewWishlistUseCase: sl()));
+  sl.registerFactory(
+    () => WishlistCubit(
+      getAllWishlistUseCase: sl(),
+      getNeededMoneyUseCase: sl(),
+      getAvailableMoneyUseCase: sl(),
+      getTotalWishlistUseCase: sl(),
+    ),
+  );
 }

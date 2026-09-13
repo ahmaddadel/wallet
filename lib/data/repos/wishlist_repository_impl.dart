@@ -26,26 +26,37 @@ class WishlistRepositoryImpl implements WishlistRepository {
   }
 
   @override
-  Future<List<WishlistEntity>> getAllWishlist() async{
+  Future<void> deleteAllWishlist() async {
+    await box.clear();
+  }
+
+  @override
+  Future<List<WishlistEntity>> getAllWishlist() async {
     final models = box.values.toList();
     return models.map((element) => element.toEntity()).toList();
   }
 
   @override
-  Future<double> getAvailableMoney() {
-    // TODO: implement getAvailableMoney
-    throw UnimplementedError();
+  Future<double> getAvailableMoney() async {
+    final models = box.values.toList();
+    return models.fold<double>(
+      0.0,
+      (total, item) => total + (item.savingsAmount ?? 0.0),
+    );
   }
 
   @override
-  Future<double> getTotalAmountNeeded() {
-    // TODO: implement getTotalAmountNeeded
-    throw UnimplementedError();
+  Future<double> getTotalAmountNeeded() async {
+    final models = box.values.toList();
+    return models.fold<double>(
+      0.0,
+      (total, item) => total + (item.targetPrice - (item.savingsAmount ?? 0.0)),
+    );
   }
 
   @override
-  Future<double> getTotalWishlist() {
-    // TODO: implement getTotalWishlist
-    throw UnimplementedError();
+  Future<double> getTotalWishlist() async {
+    final models = box.values.toList();
+    return models.fold<double>(0.0, (total, item) => total + item.targetPrice);
   }
 }

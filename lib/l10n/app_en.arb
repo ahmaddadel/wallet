@@ -66,5 +66,6 @@
   "createWish": "Create Wish",
   "amountHint": "00",
   "wishlistAddedSuccess": "The New Goal is Added",
-  "wishlistAddedFailed": "Failed to add the goal, please try again"
+  "wishlistAddedFailed": "Failed to add the goal, please try again",
+  "saved": "Saved"
 }

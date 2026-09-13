@@ -20,7 +20,7 @@ class WishlistModelAdapter extends TypeAdapter<WishlistModel> {
       id: fields[0] as int,
       name: fields[1] as String,
       targetPrice: fields[2] as double,
-      savingsAmount: fields[3] as double,
+      savingsAmount: fields[3] as double?,
     );
   }
 

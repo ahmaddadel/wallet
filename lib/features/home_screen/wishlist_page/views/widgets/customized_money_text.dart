@@ -4,12 +4,14 @@ import 'package:wallet/core/resources/app_fonts.dart';
 
 class CustomizedMoneyText extends StatelessWidget {
   final String text;
+  final double money;
   final Color color;
 
   const CustomizedMoneyText({
     super.key,
     this.color = AppColors.black,
     required this.text,
+    required this.money,
   });
 
   @override
@@ -25,7 +27,7 @@ class CustomizedMoneyText extends StatelessWidget {
             ),
           ),
           Text(
-            "\$2500",
+            "$money",
             style: TextStyle(
               color: color,
               fontWeight: FontWeightManager.bold,
